@@ -4,3 +4,8 @@ h1 {
     font-weight: bold;
     font-size: 100pt;
 }
+
+p.small {
+    text-align: center;
+    font-size: 0.9em;
+}

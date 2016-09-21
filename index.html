@@ -196,14 +196,17 @@
         <span id="view">
             <h1>NO</h1> <!-- for the poor children without the javascripts -->
         </span>
+
+        <p class="small">refresh and maybe you'll get a <em>spooky</em> different answer.</p>
+        <p class="small">made by <a href="http://niltag.net">gatlin</a> with <a href="https://github.com/gatlin/alm">alm</a>.</p>
         <script src="js/alm.js"></script>
         <script>
          window.onload = function() {
              'use strict';
              App
                  .init({ domRoot: 'view' })
+                 .runtime((runtime) => {
 
-                 .runtime(function (runtime) {
                      const answers = [
                          'HELL NO',
                          'THEY SURE AREN\'T',
@@ -211,19 +214,19 @@
                          'OF COURSE NOT'
                      ];
 
-                     const thatsSoRandom = (max, min) =>
+                     const thatsSoRandom = (min, max) =>
                          Math.floor(Math.random() * (max - min) + min);
 
-                     runtime.scope.randomAnswer = () =>
+                     runtime.scope.response =
                          answers[thatsSoRandom(0,answers.length)];
 
                      return save(runtime);
+
                  })
 
                  .main((alm) =>
-                     alm.mailbox(alm.scope.randomAnswer()).signal
-                        .map((txt) =>
-                            alm.el('h1', {}, [txt])))
+                     alm.mailbox(alm.scope.response).signal
+                     .map((answer) => alm.el('h1', {}, [answer])))
 
                  .start();
             };
