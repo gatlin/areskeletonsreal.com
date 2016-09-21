@@ -205,7 +205,7 @@
              'use strict';
              App
                  .init({ domRoot: 'view' })
-                 .runtime((runtime) => {
+                 .setup((runtime) => {
 
                      const answers = [
                          'HELL NO',
@@ -220,8 +220,7 @@
                      runtime.scope.response =
                          answers[thatsSoRandom(0,answers.length)];
 
-                     return save(runtime);
-
+                     return runtime;
                  })
 
                  .main((alm) =>
