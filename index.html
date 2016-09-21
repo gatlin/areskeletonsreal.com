@@ -193,6 +193,40 @@
 :::::::::::::::::;::;;;;;;;;;;;;;:;;''';;'''+'''+;;'';;,.......''+'''+'''+''''''''''''';;';';;;;;;;;::::;'''''''++##+@@@@@@@@@@@@@@@@@@@@@@@@@+;+@@@@@@@@@@#@#@@@@@@@@####@@@@@@@@#+++++'''@@@@@@@@@@@,:
 
 -->
-        <h1>NO</h1>
+        <span id="view">
+            <h1>NO</h1> <!-- for the poor children without the javascripts -->
+        </span>
+        <script src="js/alm.js"></script>
+        <script>
+         window.onload = function() {
+             'use strict';
+             App
+                 .init({ domRoot: 'view' })
+
+                 .runtime(function (runtime) {
+                     const answers = [
+                         'HELL NO',
+                         'THEY SURE AREN\'T',
+                         'NOT AT ALL',
+                         'OF COURSE NOT'
+                     ];
+
+                     const thatsSoRandom = (max, min) =>
+                         Math.floor(Math.random() * (max - min) + min);
+
+                     runtime.scope.randomAnswer = () =>
+                         answers[thatsSoRandom(0,answers.length)];
+
+                     return save(runtime);
+                 })
+
+                 .main((alm) =>
+                     alm.mailbox(alm.scope.randomAnswer()).signal
+                        .map((txt) =>
+                            alm.el('h1', {}, [txt])))
+
+                 .start();
+            };
+        </script>
     </body>
 </html>
