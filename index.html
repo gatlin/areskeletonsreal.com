@@ -203,32 +203,27 @@
         <script>
          window.onload = function() {
              'use strict';
-             App
-                 .init({ domRoot: 'view' })
-                 .setup((runtime) => {
+             const el = alm.el;
+             const answers = [
+                 'HELL NO',
+                 'THEY SURE AREN\'T',
+                 'NOT AT ALL',
+                 'OF COURSE NOT'
+             ];
+             function thatsSoRandom(min, max) {
+                 return Math.floor(Math.random() * (max - min) + min);
+             }
+             const app = new alm.App({
+                 domRoot: 'view',
+                 main: (scope) => {
 
-                     const answers = [
-                         'HELL NO',
-                         'THEY SURE AREN\'T',
-                         'NOT AT ALL',
-                         'OF COURSE NOT'
-                     ];
+                     const response = new alm.Mailbox(
+                         answers[thatsSoRandom(0,answers.length)]);
 
-                     const thatsSoRandom = (min, max) =>
-                         Math.floor(Math.random() * (max - min) + min);
-
-                     runtime.scope.response =
-                         answers[thatsSoRandom(0,answers.length)];
-
-                     return runtime;
-                 })
-
-                 .main((alm) =>
-                     alm.mailbox(alm.scope.response).signal
-                     .map((answer) => alm.el('h1', {}, [answer])))
-
-                 .start();
-            };
+                     return response.map(answer => el('h1', {}, [answer]));
+                 }
+             }).start();
+         };
         </script>
     </body>
 </html>
