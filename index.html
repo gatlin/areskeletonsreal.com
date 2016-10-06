@@ -215,13 +215,10 @@
              }
              const app = new alm.App({
                  domRoot: 'view',
-                 main: (scope) => {
-
-                     const response = new alm.Mailbox(
-                         answers[thatsSoRandom(0,answers.length)]);
-
-                     return response.map(answer => el('h1', {}, [answer]));
-                 }
+                 state: 0,
+                 update: (_, n) => thatsSoRandom(0, answers.length),
+                 render: n => el('h1', {}, [answers[n]]),
+                 main: _ => {}
              }).start();
          };
         </script>
