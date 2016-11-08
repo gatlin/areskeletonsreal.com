@@ -215,8 +215,8 @@
              }
              const app = new alm.App({
                  domRoot: 'view',
-                 state: 0,
-                 update: (_, n) => thatsSoRandom(0, answers.length),
+                 state: thatsSoRandom(0, answers.length),
+                 update: (_, n) => n,
                  render: n => el('h1', {}, [answers[n]]),
                  main: _ => {}
              }).start();
