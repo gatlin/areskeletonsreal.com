@@ -194,33 +194,28 @@
 
 -->
         <span id="view">
-            <h1>NO</h1> <!-- for the poor children without the javascripts -->
+            <h1 id='no'>NO</h1> <!-- for the poor children without the javascripts -->
         </span>
 
         <p class="small">refresh and maybe you'll get a <em>spooky</em> different answer.</p>
-        <p class="small">made by <a href="http://niltag.net">gatlin</a> with <a href="https://github.com/gatlin/alm">alm</a>.</p>
-        <script src="js/alm.js"></script>
+        <p class="small">made by <a href="http://niltag.net">gatlin</a>.</p>
         <script>
-         window.onload = function() {
-             'use strict';
-             const el = alm.el;
-             const answers = [
-                 'HELL NO',
-                 'THEY SURE AREN\'T',
-                 'NOT AT ALL',
-                 'OF COURSE NOT'
-             ];
-             function thatsSoRandom(min, max) {
-                 return Math.floor(Math.random() * (max - min) + min);
-             }
-             const app = new alm.App({
-                 domRoot: 'view',
-                 state: thatsSoRandom(0, answers.length),
-                 update: (_, n) => n,
-                 render: n => el('h1', {}, [answers[n]]),
-                 main: _ => {}
-             }).start();
-         };
+        function thatsSoRandom(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+        window.onload = function() {
+            var answers = [
+                'HELL NO',
+                'THEY SURE AREN\'T',
+                'NOT AT ALL',
+                'OF COURSE NOT'
+            ];
+            var n = thatsSoRandom(
+                0,
+                answers.length
+            );
+            document.getElementById('no').innerHTML = answers[n];
+        };
         </script>
     </body>
 </html>
